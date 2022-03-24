@@ -1,8 +1,14 @@
 import { useContext, useEffect } from "react";
 import MapContext from "../Map/MapContext";
 import OLTileLayer from "ol/layer/Tile";
+import TileSource from "ol/source/Tile";
 
-const TileLayer = ({ source, zIndex = 0 }) => {
+interface Props {
+	source: TileSource,
+	zIndex: number
+}
+
+const TileLayer = ({ source, zIndex = 0 }: Props) => {
 	const { map } = useContext(MapContext);
 
 	useEffect(() => {

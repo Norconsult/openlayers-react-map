@@ -17,19 +17,19 @@ const geojsonObject = mapConfig.geojsonObject;
 const geojsonObject2 = mapConfig.geojsonObject2;
 const markersLonLat = [mapConfig.kansasCityLonLat, mapConfig.blueSpringsLonLat];
 
-function addMarkers(lonLatArray) {
-  var iconStyle = new Style({
-    image: new Icon({
-      anchorXUnits: "fraction",
-      anchorYUnits: "pixels",
-      src: mapConfig.markerImage32,
-    }),
-  });
-  let features = lonLatArray.map((item) => {
+function addMarkers(lonLatArray: any) {
+  // var iconStyle = new Style({
+  //   image: new Icon({
+  //     anchorXUnits: "fraction",
+  //     anchorYUnits: "pixels",
+  //     src: mapConfig.markerImage32,
+  //   }),
+  // });
+  let features = lonLatArray.map((item: any) => {
     let feature = new Feature({
       geometry: new Point(fromLonLat(item)),
     });
-    feature.setStyle(iconStyle);
+    // feature.setStyle(iconStyle);
     return feature;
   });
   return features;
@@ -70,7 +70,7 @@ const App = () => {
               style={FeatureStyles.MultiPolygon}
             />
           )}
-          {showMarker && <VectorLayer source={vector({ features })} />}
+          {showMarker && <VectorLayer source={vector({ features })} style={FeatureStyles.MultiPolygon} />}
         </Layers>
         <Controls>
           <FullScreenControl />
