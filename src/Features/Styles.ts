@@ -4,7 +4,7 @@ export default {
   Point: new Style({
     image: new CircleStyle({
       radius: 10,
-      fill: null,
+      fill: undefined,
       stroke: new Stroke({
         color: "magenta",
       }),
