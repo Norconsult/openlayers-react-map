@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Map from "./Map";
 import { Layers, TileLayer, VectorLayer } from "./Layers";
 import { Style, Icon } from "ol/style";
+import IconAnchorUnits from "ol/style/IconAnchorUnits";
 import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import { osm, vector } from "./Source";
@@ -18,18 +19,18 @@ const geojsonObject2 = mapConfig.geojsonObject2;
 const markersLonLat = [mapConfig.kansasCityLonLat, mapConfig.blueSpringsLonLat];
 
 function addMarkers(lonLatArray: any) {
-  // var iconStyle = new Style({
-  //   image: new Icon({
-  //     anchorXUnits: "fraction",
-  //     anchorYUnits: "pixels",
-  //     src: mapConfig.markerImage32,
-  //   }),
-  // });
+  const iconStyle = new Style({
+    image: new Icon({
+      anchorXUnits: IconAnchorUnits.FRACTION,
+      anchorYUnits: IconAnchorUnits.PIXELS,
+      src: mapConfig.markerImage32,
+    }),
+  });
   let features = lonLatArray.map((item: any) => {
     let feature = new Feature({
       geometry: new Point(fromLonLat(item)),
     });
-    // feature.setStyle(iconStyle);
+    feature.setStyle(iconStyle);
     return feature;
   });
   return features;
