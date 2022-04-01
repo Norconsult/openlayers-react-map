@@ -9,8 +9,9 @@ export type TMapState = {
 };
 
 export interface IMapContext {
-  map: Map;
+  map?: Map;
 }
 
-const MapContext = React.createContext<IMapContext | void>(undefined);
+// const MapContext = React.createContext<IMapContext | void>(undefined);
+export const MapContext = React.createContext({} as IMapContext);
 export default MapContext;

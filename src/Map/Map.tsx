@@ -9,21 +9,10 @@ interface Props {
 	center: Array<number>
 }
 
-// interface IMap {
-// 	olMap: ol.Map
-// }
-
 const Map = ({ children, zoom, center }: Props) => {
 	const mapRef = useRef();
-	let options = {
-		view: new ol.View({ zoom, center }),
-		layers: [],
-		controls: [],
-		overlays: []
-	};
-	let mapObject = new ol.Map(options);
-	mapObject.setTarget(mapRef.current);
-	const [map, setMap] = useState<IMapContext>({ map: mapObject });	
+
+	const [map, setMap] = useState<IMapContext>({map: undefined});	
 
 	// on component mount
 	useEffect(() => {
@@ -40,24 +29,24 @@ const Map = ({ children, zoom, center }: Props) => {
 		setMap({ map: mapObject });
 
 		return () => mapObject.setTarget(undefined);
-	}, []);
+	}, [center, zoom]);
 
 	// zoom change handler
 	useEffect(() => {
-		if (!map) return;
+		if (!map?.map) return;
 
 		map.map.getView().setZoom(zoom);
-	}, [zoom]);
+	}, [map, zoom]);
 
 	// center change handler
 	useEffect(() => {
-		if (!map) return;
+		if (!map?.map) return;
 
 		map.map.getView().setCenter(center)
-	}, [center])
-
+	}, [center, map])
+	console.log('CHILDREN: ', children);
 	return (
-		<MapContext.Provider value= {{ map }}>
+		<MapContext.Provider value= {{ map: map.map }}>
 			<div ref={mapRef.current} className="ol-map">
 				{children}
 			</div>
