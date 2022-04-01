@@ -8,7 +8,7 @@ import Point from "ol/geom/Point";
 import { osm, vector } from "./Source";
 import { fromLonLat, get } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
-import { Controls, FullScreenControl } from "./Controls";
+import { Controls } from "./Controls";
 import FeatureStyles from "./Features/Styles";
 
 import mapConfig from "./config.json";
@@ -59,6 +59,7 @@ const App = () => {
                 }),
               })}
               style={FeatureStyles.MultiPolygon}
+              zIndex={0}
             />
           )}
           {showLayer2 && (
@@ -69,12 +70,13 @@ const App = () => {
                 }),
               })}
               style={FeatureStyles.MultiPolygon}
+              zIndex={0}
             />
           )}
-          {showMarker && <VectorLayer source={vector({ features })} style={FeatureStyles.MultiPolygon} />}
+          {showMarker && <VectorLayer source={vector({ features })} style={FeatureStyles.MultiPolygon} zIndex={0} />}
         </Layers>
         <Controls>
-          <FullScreenControl />
+          {/* <FullScreenControl /> */}
         </Controls>
       </Map>
       <div>
