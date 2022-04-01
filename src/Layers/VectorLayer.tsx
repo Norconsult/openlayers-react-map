@@ -1,8 +1,15 @@
 import { useContext, useEffect } from "react";
 import MapContext from "../Map/MapContext";
 import OLVectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
 
-const VectorLayer = ({ source, style, zIndex = 0 }) => {
+interface Props {
+	source: VectorSource,
+	style: any,
+	zIndex: number
+}
+
+const VectorLayer = ({ source, style, zIndex = 0 }: Props) => {
 	const { map } = useContext(MapContext);
 
 	useEffect(() => {
@@ -21,7 +28,7 @@ const VectorLayer = ({ source, style, zIndex = 0 }) => {
 				map.removeLayer(vectorLayer);
 			}
 		};
-	}, [map]);
+	}, [map, source, style, zIndex]);
 
 	return null;
 };
