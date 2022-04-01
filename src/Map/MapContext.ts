@@ -13,5 +13,5 @@ export interface IMapContext {
 }
 
 // const MapContext = React.createContext<IMapContext | void>(undefined);
-export const MapContext = React.createContext({} as IMapContext);
+const MapContext = React.createContext({} as IMapContext);
 export default MapContext;

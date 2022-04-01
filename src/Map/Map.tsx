@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Map = ({ children, zoom, center }: Props) => {
-	const mapRef = useRef();
+	const mapRef = useRef<HTMLDivElement>(null);
 
 	const [map, setMap] = useState<IMapContext>({map: undefined});	
 
@@ -22,12 +22,10 @@ const Map = ({ children, zoom, center }: Props) => {
 			controls: [],
 			overlays: []
 		};
-
 		let mapObject = new ol.Map(options);
-		mapObject.setTarget(mapRef.current);
+		mapObject.setTarget(mapRef.current || undefined);
 		
 		setMap({ map: mapObject });
-
 		return () => mapObject.setTarget(undefined);
 	}, [center, zoom]);
 
@@ -44,10 +42,10 @@ const Map = ({ children, zoom, center }: Props) => {
 
 		map.map.getView().setCenter(center)
 	}, [center, map])
-	console.log('CHILDREN: ', children);
+	console.log('CHILDREN: ', map.map);
 	return (
 		<MapContext.Provider value= {{ map: map.map }}>
-			<div ref={mapRef.current} className="ol-map">
+			<div ref={mapRef} className="ol-map">
 				{children}
 			</div>
 		</MapContext.Provider>

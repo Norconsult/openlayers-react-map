@@ -75,9 +75,9 @@ const App = () => {
           )}
           {showMarker && <VectorLayer source={vector({ features })} style={FeatureStyles.MultiPolygon} zIndex={0} />}
         </Layers>
-        <Controls>
+        {/* <Controls> */}
           {/* <FullScreenControl /> */}
-        </Controls>
+        {/* </Controls> */}
       </Map>
       <div>
         <input

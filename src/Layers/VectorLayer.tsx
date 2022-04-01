@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import MapContext, { IMapContext } from "../Map/MapContext";
+import MapContext from "../Map/MapContext";
 import OLVectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const VectorLayer = ({ source, style, zIndex = 0 }: Props) => {
-	const { map } = useContext(MapContext) as IMapContext;
+	const { map } = useContext(MapContext);
 
 	useEffect(() => {
 		if (!map) return;
